@@ -1,0 +1,34 @@
+<div>
+    <h2 translate="blogApp.entry.home.title">Entrys</h2>
+    <jh-alert></jh-alert>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <button class="btn btn-primary" ui-sref="entry.new">
+                    <span class="glyphicon glyphicon-flash"></span> <span translate="blogApp.entry.home.createLabel">Create a new Entry</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div infinite-scroll="loadPage(page + 1)" infinite-scroll-disabled="links['last'] == page">
+        <div ng-repeat="entry in entrys track by entry.id">
+            <h2>{{entry.title}}</h2>
+            <small>Posted on {{entry.date | date: 'short'}} by {{entry.blog.user.login}}</small>
+            <div ng-bind-html="entry.content"></div>
+            <div class="btn-group" style="margin-top: 10px">
+                <button type="submit"
+                        ui-sref="entry.edit({id:entry.id})"
+                        class="btn btn-xs btn-default">
+                    <span class="glyphicon glyphicon-pencil"></span>&nbsp;<span
+                    translate="entity.action.edit"> Edit</span>
+                </button>
+                <button type="submit"
+                        ui-sref="entry.delete({id:entry.id})"
+                        class="btn btn-xs btn-danger">
+                    <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span translate="entity.action.delete"> Delete</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
